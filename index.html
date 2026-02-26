@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <title>Monster Shooter</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Головне меню -->
+    <div id="mainMenu" class="screen active">
+        <h1>🔫 MONSTER SHOOTER</h1>
+        <div class="record-display">
+            <p>🏆 РЕКОРД: <span id="bestWave">0</span> ХВИЛЯ</p>
+        </div>
+        <button class="btn-primary" onclick="game.showCharacterSelect()">ГРАТИ</button>
+        <button class="btn-secondary" onclick="game.showShop()">МАГАЗИН</button>
+    </div>
+
+    <!-- Вибір персонажа -->
+    <div id="characterSelect" class="screen">
+        <h2>ОБЕРИ ПЕРСОНАЖА</h2>
+        <div class="character-grid">
+            <div class="character-card" onclick="game.selectCharacter('Tito')">
+                <img src="Tito.png" alt="Tito" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22%3E%3Crect fill=%22%234CAF50%22 width=%22100%22 height=%22100%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2220%22 fill=%22white%22 text-anchor=%22middle%22 dy=%22.3em%22%3ETito%3C/text%3E%3C/svg%3E'">
+                <p>Tito</p>
+            </div>
+            <div class="character-card" onclick="game.selectCharacter('Smartik')">
+                <img src="Smartik.png" alt="Smartik" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22%3E%3Crect fill=%22%232196F3%22 width=%22100%22 height=%22100%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2216%22 fill=%22white%22 text-anchor=%22middle%22 dy=%22.3em%22%3ESmartik%3C/text%3E%3C/svg%3E'">
+                <p>Smartik</p>
+            </div>
+            <div class="character-card" onclick="game.selectCharacter('Junior')">
+                <img src="Junior.png" alt="Junior" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22%3E%3Crect fill=%22%23FF9800%22 width=%22100%22 height=%22100%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2218%22 fill=%22white%22 text-anchor=%22middle%22 dy=%22.3em%22%3EJunior%3C/text%3E%3C/svg%3E'">
+                <p>Junior</p>
+            </div>
+            <div class="character-card" onclick="game.selectCharacter('Fil')">
+                <img src="Fil.png" alt="Fil" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22%3E%3Crect fill=%22%239C27B0%22 width=%22100%22 height=%22100%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2220%22 fill=%22white%22 text-anchor=%22middle%22 dy=%22.3em%22%3EFil%3C/text%3E%3C/svg%3E'">
+                <p>Fil</p>
+            </div>
+            <div class="character-card" onclick="game.selectCharacter('Milka')">
+                <img src="Milka.png" alt="Milka" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22%3E%3Crect fill=%22%23E91E63%22 width=%22100%22 height=%22100%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2218%22 fill=%22white%22 text-anchor=%22middle%22 dy=%22.3em%22%3EMilka%3C/text%3E%3C/svg%3E'">
+                <p>Milka</p>
+            </div>
+        </div>
+        <button class="btn-back" onclick="game.showMainMenu()">НАЗАД</button>
+    </div>
+
+    <!-- Магазин -->
+    <div id="shop" class="screen">
+        <h2>🏪 МАГАЗИН</h2>
+        <div class="money-display">
+            <p>💰 Монети: <span id="shopCoins">0</span></p>
+        </div>
+        <div class="shop-items">
+            <div class="shop-item">
+                <h3>⚔️ УРОН</h3>
+                <p>Рівень: <span id="damageLevel">1</span></p>
+                <p>Ціна: <span id="damagePrice">50</span> 💰</p>
+                <button class="btn-buy" onclick="game.buyUpgrade('damage')">КУПИТИ</button>
+            </div>
+            <div class="shop-item">
+                <h3>⚡ ШВИДКІСТЬ</h3>
+                <p>Рівень: <span id="fireRateLevel">1</span></p>
+                <p>Ціна: <span id="fireRatePrice">75</span> 💰</p>
+                <button class="btn-buy" onclick="game.buyUpgrade('fireRate')">КУПИТИ</button>
+            </div>
+            <div class="shop-item">
+                <h3>❤️ ЗДОРОВ'Я</h3>
+                <p>Рівень: <span id="healthLevel">1</span></p>
+                <p>Ціна: <span id="healthPrice">100</span> 💰</p>
+                <button class="btn-buy" onclick="game.buyUpgrade('health')">КУПИТИ</button>
+            </div>
+        </div>
+        <button class="btn-back" onclick="game.showMainMenu()">НАЗАД</button>
+    </div>
+
+    <!-- Ігровий екран -->
+    <div id="gameScreen" class="screen">
+        <canvas id="gameCanvas"></canvas>
+        <div id="gameHUD">
+            <div class="hud-top">
+                <div class="hud-item">
+                    <span class="hud-label">ХВИЛЯ</span>
+                    <span id="waveDisplay" class="hud-value">1</span>
+                </div>
+                <div class="hud-item">
+                    <span class="hud-label">💰</span>
+                    <span id="coinsDisplay" class="hud-value">0</span>
+                </div>
+            </div>
+            <div class="health-bar-container">
+                <div id="healthBar" class="health-bar"></div>
+            </div>
+            <button id="pauseBtn" class="btn-pause" onclick="game.togglePause()">⏸</button>
+        </div>
+    </div>
+
+    <!-- Пауза -->
+    <div id="pauseMenu" class="overlay">
+        <div class="menu-box">
+            <h2>ПАУЗА</h2>
+            <button class="btn-primary" onclick="game.togglePause()">ПРОДОВЖИТИ</button>
+            <button class="btn-secondary" onclick="game.showShop(); game.isPaused = false;">МАГАЗИН</button>
+            <button class="btn-secondary" onclick="game.restartGame()">РЕСТАРТ</button>
+            <button class="btn-back" onclick="game.quitToMenu()">ВИХІД</button>
+        </div>
+    </div>
+
+    <!-- Game Over -->
+    <div id="gameOver" class="overlay">
+        <div class="menu-box">
+            <h2>GAME OVER</h2>
+            <p class="game-over-stats">Досягнуто хвилі: <span id="finalWave">0</span></p>
+            <p class="game-over-stats">Зароблено монет: <span id="finalCoins">0</span></p>
+            <p id="newRecord" class="new-record" style="display: none;">🎉 НОВИЙ РЕКОРД! 🎉</p>
+            <button class="btn-primary" onclick="game.restartGame()">ГРАТИ ЗНОВУ</button>
+            <button class="btn-secondary" onclick="game.showShop()">МАГАЗИН</button>
+            <button class="btn-back" onclick="game.quitToMenu()">МЕНЮ</button>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>

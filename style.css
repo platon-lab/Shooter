@@ -1,0 +1,398 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    font-family: 'Arial Black', Arial, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    overflow: hidden;
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    touch-action: none;
+}
+
+/* Екрани */
+.screen {
+    display: none;
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.screen.active {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Головне меню */
+#mainMenu {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+#mainMenu h1 {
+    font-size: clamp(2rem, 8vw, 3.5rem);
+    margin-bottom: 20px;
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+.record-display {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 15px;
+    border-radius: 15px;
+    margin: 20px 0;
+    backdrop-filter: blur(10px);
+}
+
+.record-display p {
+    font-size: clamp(1rem, 4vw, 1.5rem);
+    font-weight: bold;
+}
+
+/* Кнопки */
+.btn-primary, .btn-secondary, .btn-back, .btn-buy {
+    font-family: 'Arial Black', Arial, sans-serif;
+    font-size: clamp(1rem, 4vw, 1.3rem);
+    padding: 15px 40px;
+    margin: 10px;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    font-weight: bold;
+    min-width: 200px;
+    max-width: 90vw;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    color: white;
+}
+
+.btn-primary:active {
+    transform: scale(0.95);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.btn-secondary {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    color: white;
+}
+
+.btn-secondary:active {
+    transform: scale(0.95);
+}
+
+.btn-back {
+    background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+    color: white;
+}
+
+.btn-buy {
+    background: linear-gradient(135deg, #30cfd0 0%, #330867 100%);
+    color: white;
+    padding: 10px 20px;
+    font-size: clamp(0.8rem, 3vw, 1rem);
+    min-width: 100px;
+}
+
+/* Вибір персонажа */
+#characterSelect {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+#characterSelect h2 {
+    font-size: clamp(1.5rem, 6vw, 2.5rem);
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.character-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+    gap: 15px;
+    width: 90%;
+    max-width: 500px;
+    margin: 20px 0;
+}
+
+.character-card {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 15px;
+    padding: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    border: 3px solid transparent;
+}
+
+.character-card:active {
+    transform: scale(0.95);
+    border-color: #f5576c;
+    background: rgba(255, 255, 255, 0.4);
+}
+
+.character-card img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 5px;
+}
+
+.character-card p {
+    font-size: clamp(0.7rem, 3vw, 1rem);
+    font-weight: bold;
+    text-align: center;
+}
+
+/* Магазин */
+#shop {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+#shop h2 {
+    font-size: clamp(1.5rem, 6vw, 2.5rem);
+    margin-bottom: 15px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.money-display {
+    background: rgba(255, 215, 0, 0.3);
+    padding: 12px;
+    border-radius: 15px;
+    margin-bottom: 20px;
+    backdrop-filter: blur(10px);
+}
+
+.money-display p {
+    font-size: clamp(1rem, 4vw, 1.5rem);
+    font-weight: bold;
+}
+
+.shop-items {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 90%;
+    max-width: 400px;
+    margin-bottom: 20px;
+}
+
+.shop-item {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 15px;
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+    text-align: center;
+}
+
+.shop-item h3 {
+    font-size: clamp(1.2rem, 5vw, 1.8rem);
+    margin-bottom: 10px;
+}
+
+.shop-item p {
+    font-size: clamp(0.9rem, 3.5vw, 1.2rem);
+    margin: 5px 0;
+}
+
+/* Ігровий екран */
+#gameScreen {
+    display: none;
+    background: #000;
+}
+
+#gameScreen.active {
+    display: block;
+}
+
+#gameCanvas {
+    width: 100vw;
+    height: 100vh;
+    display: block;
+    touch-action: none;
+}
+
+/* HUD */
+#gameHUD {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    pointer-events: none;
+}
+
+.hud-top {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.5) 0%, transparent 100%);
+}
+
+.hud-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 8px 15px;
+    border-radius: 10px;
+    backdrop-filter: blur(5px);
+}
+
+.hud-label {
+    color: #fff;
+    font-size: clamp(0.7rem, 3vw, 1rem);
+    font-weight: bold;
+}
+
+.hud-value {
+    color: #ffd700;
+    font-size: clamp(1.2rem, 5vw, 2rem);
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.health-bar-container {
+    position: absolute;
+    top: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    max-width: 300px;
+    height: 20px;
+    background: rgba(255, 0, 0, 0.3);
+    border-radius: 10px;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    overflow: hidden;
+}
+
+.health-bar {
+    height: 100%;
+    background: linear-gradient(90deg, #ff0000 0%, #ff6b6b 100%);
+    width: 100%;
+    transition: width 0.3s ease;
+    border-radius: 8px;
+}
+
+.btn-pause {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    pointer-events: auto;
+    backdrop-filter: blur(5px);
+}
+
+.btn-pause:active {
+    transform: scale(0.9);
+}
+
+/* Оверлеї */
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.8);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.overlay.active {
+    display: flex;
+}
+
+.menu-box {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 30px;
+    border-radius: 20px;
+    text-align: center;
+    color: white;
+    max-width: 90vw;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+}
+
+.menu-box h2 {
+    font-size: clamp(1.5rem, 6vw, 2.5rem);
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.game-over-stats {
+    font-size: clamp(1rem, 4vw, 1.5rem);
+    margin: 10px 0;
+    font-weight: bold;
+}
+
+.new-record {
+    font-size: clamp(1.2rem, 5vw, 2rem);
+    color: #ffd700;
+    animation: bounce 1s infinite;
+    margin: 15px 0;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+/* Адаптивність */
+@media (max-width: 400px) {
+    .character-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+    }
+}
+
+@media (orientation: landscape) and (max-height: 500px) {
+    #mainMenu h1 {
+        font-size: 2rem;
+        margin-bottom: 10px;
+    }
+    
+    .btn-primary, .btn-secondary, .btn-back {
+        padding: 10px 30px;
+        margin: 5px;
+        font-size: 1rem;
+    }
+    
+    .record-display {
+        padding: 10px;
+        margin: 10px 0;
+    }
+}

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Створення placeholder зображень</title>
+</head>
+<body>
+    <canvas id="canvas" width="200" height="200"></canvas>
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        
+        const characters = [
+            {name: 'Tito', color: '#4CAF50'},
+            {name: 'Smartik', color: '#2196F3'},
+            {name: 'Junior', color: '#FF9800'},
+            {name: 'Fil', color: '#9C27B0'},
+            {name: 'Milka', color: '#E91E63'}
+        ];
+        
+        characters.forEach(char => {
+            ctx.fillStyle = char.color;
+            ctx.fillRect(0, 0, 200, 200);
+            ctx.fillStyle = 'white';
+            ctx.font = 'bold 30px Arial';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText(char.name, 100, 100);
+            
+            // Простий аватар
+            ctx.fillStyle = 'rgba(255,255,255,0.3)';
+            ctx.beginPath();
+            ctx.arc(100, 80, 40, 0, Math.PI * 2);
+            ctx.fill();
+            
+            ctx.fillStyle = 'white';
+            ctx.beginPath();
+            ctx.arc(90, 70, 8, 0, Math.PI * 2);
+            ctx.arc(110, 70, 8, 0, Math.PI * 2);
+            ctx.fill();
+            
+            // Скачування
+            const link = document.createElement('a');
+            link.download = char.name + '.png';
+            link.href = canvas.toDataURL();
+            link.click();
+        });
+    </script>
+</body>
+</html>
