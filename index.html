@@ -7,6 +7,29 @@
     <meta name="mobile-web-app-capable" content="yes">
     <title>Monster Shooter</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* Фікс скролу: дозволяємо екрану вибору персонажа прокручуватися вгору та вниз */
+        #characterSelect {
+            overflow-y: auto !important;
+            max-height: 100vh !important;
+            -webkit-overflow-scrolling: touch !important;
+            scroll-behavior: smooth;
+        }
+
+        /* Великий відступ у самому вверху перед героями */
+        .custom-top-spacer {
+            height: 75vh; /* Займає 75% висоти екрану, щоб треба було гортати вниз */
+            width: 100%;
+            pointer-events: none;
+        }
+
+        /* Відступ у самому низу, щоб герої не тулилися до краю і все ідеально листалося */
+        .custom-bottom-spacer {
+            height: 100px;
+            width: 100%;
+            pointer-events: none;
+        }
+    </style>
 </head>
 <body>
     <!-- Головне меню -->
@@ -22,6 +45,10 @@
     <!-- Вибір персонажа -->
     <div id="characterSelect" class="screen">
         <h2>ОБЕРИ ПЕРСОНАЖА</h2>
+        
+        <!-- Той самий великий відступ уверху, про який ти просив -->
+        <div class="custom-top-spacer"></div>
+
         <div class="character-grid">
             <div class="character-card" onclick="game.selectCharacter('Tito')">
                 <img src="Tito.png" alt="Tito" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22%3E%3Crect fill=%22%234CAF50%22 width=%22100%22 height=%22100%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2220%22 fill=%22white%22 text-anchor=%22middle%22 dy=%22.3em%22%3ETito%3C/text%3E%3C/svg%3E'">
@@ -114,6 +141,9 @@
             </div>
         </div>
         <button class="btn-back" onclick="game.showMainMenu()">НАЗАД</button>
+
+        <!-- Відступ знизу, щоб можна було комфортно доскролити до останнього героя -->
+        <div class="custom-bottom-spacer"></div>
     </div>
 
     <!-- Магазин -->
