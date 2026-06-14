@@ -8,26 +8,33 @@
     <title>Monster Shooter</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        /* Фікс скролу: дозволяємо екрану вибору персонажа прокручуватися вгору та вниз */
+        /* Налаштування для повноцінного гортання меню вибору персонажів */
         #characterSelect {
             overflow-y: auto !important;
-            max-height: 100vh !important;
-            -webkit-overflow-scrolling: touch !important;
+            -webkit-overflow-scrolling: touch;
+            padding-bottom: 40px;
+        }
+        .character-grid {
+            max-height: 65vh;
+            overflow-y: auto !important;
+            padding: 15px;
             scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
         }
-
-        /* Великий відступ у самому вверху перед героями */
-        .custom-top-spacer {
-            height: 75vh; /* Займає 75% висоти екрану, щоб треба було гортати вниз */
-            width: 100%;
-            pointer-events: none;
+        /* Кастомізація скролбару для красивого вигляду */
+        .character-grid::-webkit-scrollbar {
+            width: 8px;
         }
-
-        /* Відступ у самому низу, щоб герої не тулилися до краю і все ідеально листалося */
-        .custom-bottom-spacer {
-            height: 100px;
-            width: 100%;
-            pointer-events: none;
+        .character-grid::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 4px;
+        }
+        .character-grid::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 4px;
+        }
+        .character-grid::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.5);
         }
     </style>
 </head>
@@ -38,17 +45,13 @@
         <div class="record-display">
             <p>🏆 РЕКОРД: <span id="bestWave">0</span> ХВИЛЯ</p>
         </div>
-        <button class="btn-primary" onclick="game.showCharacterSelect()">ГРАТИ</button>
+        <button class="btn-primary" onclick="launchFullScreen(); game.showCharacterSelect()">ГРАТИ</button>
         <button class="btn-secondary" onclick="game.showShop()">МАГАЗИН</button>
     </div>
 
     <!-- Вибір персонажа -->
     <div id="characterSelect" class="screen">
         <h2>ОБЕРИ ПЕРСОНАЖА</h2>
-        
-        <!-- Той самий великий відступ уверху, про який ти просив -->
-        <div class="custom-top-spacer"></div>
-
         <div class="character-grid">
             <div class="character-card" onclick="game.selectCharacter('Tito')">
                 <img src="Tito.png" alt="Tito" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22%3E%3Crect fill=%22%234CAF50%22 width=%22100%22 height=%22100%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2220%22 fill=%22white%22 text-anchor=%22middle%22 dy=%22.3em%22%3ETito%3C/text%3E%3C/svg%3E'">
@@ -71,14 +74,76 @@
                 <p>Milka</p>
             </div>
             <div class="character-card" onclick="game.selectCharacter('Bark')">
-                <img src="Bark.png" alt="Bark" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22%3E%3Crect fill=%22%23E91E63%22 width=%22100%22 height=%22100%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2218%22 fill=%22white%22 text-anchor=%22middle%22 dy=%22.3em%22%3EMilka%3C/text%3E%3C/svg%3E'">
+                <img src="Bark.png" alt="Bark" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22%3E%3Crect fill=%22%23795548%22 width=%22100%22 height=%22100%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2218%22 fill=%22white%22 text-anchor=%22middle%22 dy=%22.3em%22%3EBark%3C/text%3E%3C/svg%3E'">
                 <p>Bark</p>
+            </div>
+            <!-- Нові 16 героїв -->
+            <div class="character-card" onclick="game.selectCharacter('Persik')">
+                <img src="Persik.png" alt="Persik" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22%3E%3Crect fill=%22%23FF8A65%22 width=%22100%22 height=%22100%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2218%22 fill=%22white%22 text-anchor=%22middle%22 dy=%22.3em%22%3EPersik%3C/text%3E%3C/svg%3E'">
+                <p>Persik</p>
+            </div>
+            <div class="character-card" onclick="game.selectCharacter('Spike')">
+                <img src="Spike.png" alt="Spike" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22%3E%3Crect fill=%22%2300796B%22 width=%22100%22 height=%22100%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2218%22 fill=%22white%22 text-anchor=%22middle%22 dy=%22.3em%22%3ESpike%3C/text%3E%3C/svg%3E'">
+                <p>Spike</p>
+            </div>
+            <div class="character-card" onclick="game.selectCharacter('Alyonka')">
+                <img src="Alyonka.png" alt="Alyonka" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22%3E%3Crect fill=%22%23FBC02D%22 width=%22100%22 height=%22100%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2216%22 fill=%22white%22 text-anchor=%22middle%22 dy=%22.3em%22%3EAlyonka%3C/text%3E%3C/svg%3E'">
+                <p>Alyonka</p>
+            </div>
+            <div class="character-card" onclick="game.selectCharacter('Lilu')">
+                <img src="Lilu.png" alt="Lilu" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22%3E%3Crect fill=%22%2300BCD4%22 width=%22100%22 height=%22100%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2218%22 fill=%22white%22 text-anchor=%22middle%22 dy=%22.3em%22%3ELilu%3C/text%3E%3C/svg%3E'">
+                <p>Lilu</p>
+            </div>
+            <div class="character-card" onclick="game.selectCharacter('Manya')">
+                <img src="Manya.png" alt="Manya" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22%3E%3Crect fill=%22%23C2185B%22 width=%22100%22 height=%22100%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2218%22 fill=%22white%22 text-anchor=%22middle%22 dy=%22.3em%22%3EManya%3C/text%3E%3C/svg%3E'">
+                <p>Manya</p>
+            </div>
+            <div class="character-card" onclick="game.selectCharacter('Liza')">
+                <img src="Liza.png" alt="Liza" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22%3E%3Crect fill=%22%237B1FA2%22 width=%22100%22 height=%22100%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2218%22 fill=%22white%22 text-anchor=%22middle%22 dy=%22.3em%22%3ELiza%3C/text%3E%3C/svg%3E'">
+                <p>Liza</p>
+            </div>
+            <div class="character-card" onclick="game.selectCharacter('Grivna')">
+                <img src="Grivna.png" alt="Grivna" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22%3E%3Crect fill=%22%23FFB300%22 width=%22100%22 height=%22100%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2216%22 fill=%22white%22 text-anchor=%22middle%22 dy=%22.3em%22%3EGrivna%3C/text%3E%3C/svg%3E'">
+                <p>Grivna</p>
+            </div>
+            <div class="character-card" onclick="game.selectCharacter('Ben')">
+                <img src="Ben.png" alt="Ben" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22%3E%3Crect fill=%22%238D6E63%22 width=%22100%22 height=%22100%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2218%22 fill=%22white%22 text-anchor=%22middle%22 dy=%22.3em%22%3EBen%3C/text%3E%3C/svg%3E'">
+                <p>Ben</p>
+            </div>
+            <div class="character-card" onclick="game.selectCharacter('Goldi')">
+                <img src="Goldi.png" alt="Goldi" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22%3E%3Crect fill=%22%23FFD700%22 width=%22100%22 height=%22100%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2218%22 fill=%22black%22 text-anchor=%22middle%22 dy=%22.3em%22%3EGoldi%3C/text%3E%3C/svg%3E'">
+                <p>Goldi</p>
+            </div>
+            <div class="character-card" onclick="game.selectCharacter('Raf')">
+                <img src="Raf.png" alt="Raf" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22%3E%3Crect fill=%22%2303A9F4%22 width=%22100%22 height=%22100%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2218%22 fill=%22white%22 text-anchor=%22middle%22 dy=%22.3em%22%3ERaf%3C/text%3E%3C/svg%3E'">
+                <p>Raf</p>
+            </div>
+            <div class="character-card" onclick="game.selectCharacter('Veles')">
+                <img src="Veles.png" alt="Veles" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22%3E%3Crect fill=%22%2337474F%22 width=%22100%22 height=%22100%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2218%22 fill=%22white%22 text-anchor=%22middle%22 dy=%22.3em%22%3EVeles%3C/text%3E%3C/svg%3E'">
+                <p>Veles</p>
+            </div>
+            <div class="character-card" onclick="game.selectCharacter('Masha')">
+                <img src="Masha.png" alt="Masha" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22%3E%3Crect fill=%22%23FF4081%22 width=%22100%22 height=%22100%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2218%22 fill=%22white%22 text-anchor=%22middle%22 dy=%22.3em%22%3EMasha%3C/text%3E%3C/svg%3E'">
+                <p>Masha</p>
+            </div>
+            <div class="character-card" onclick="game.selectCharacter('Brilliantik')">
+                <img src="Brilliantik.png" alt="Brilliantik" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22%3E%3Crect fill=%22%2300E676%22 width=%22100%22 height=%22100%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2214%22 fill=%22white%22 text-anchor=%22middle%22 dy=%22.3em%22%3EBrilliantik%3C/text%3E%3C/svg%3E'">
+                <p>Brilliantik</p>
+            </div>
+            <div class="character-card" onclick="game.selectCharacter('Richik')">
+                <img src="Richik.png" alt="Richik" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22%3E%3Crect fill=%22%232E7D32%22 width=%22100%22 height=%22100%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2218%22 fill=%22white%22 text-anchor=%22middle%22 dy=%22.3em%22%3ERichik%3C/text%3E%3C/svg%3E'">
+                <p>Richik</p>
+            </div>
+            <div class="character-card" onclick="game.selectCharacter('Shunya')">
+                <img src="Shunya.png" alt="Shunya" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22%3E%3Crect fill=%22%239E9D24%22 width=%22100%22 height=%22100%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2218%22 fill=%22white%22 text-anchor=%22middle%22 dy=%22.3em%22%3EShunya%3C/text%3E%3C/svg%3E'">
+                <p>Shunya</p>
+            </div>
+            <div class="character-card" onclick="game.selectCharacter('Baks')">
+                <img src="Baks.png" alt="Baks" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22%3E%3Crect fill=%22%234CAF50%22 width=%22100%22 height=%22100%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2218%22 fill=%22white%22 text-anchor=%22middle%22 dy=%22.3em%22%3EBaks%3C/text%3E%3C/svg%3E'">
+                <p>Baks</p>
             </div>
         </div>
         <button class="btn-back" onclick="game.showMainMenu()">НАЗАД</button>
-
-        <!-- Відступ знизу, щоб можна було комфортно доскролити до останнього героя -->
-        <div class="custom-bottom-spacer"></div>
     </div>
 
     <!-- Магазин -->
@@ -155,6 +220,21 @@
         </div>
     </div>
 
+    <script>
+        // Функція активації повноекранного режиму при запуску гри
+        function launchFullScreen() {
+            const element = document.documentElement;
+            if (element.requestFullscreen) {
+                element.requestFullscreen();
+            } else if (element.mozRequestFullScreen) { /* Firefox */
+                element.mozRequestFullScreen();
+            } else if (element.webkitRequestFullscreen) { /* Chrome, Safari & Opera */
+                element.webkitRequestFullscreen();
+            } else if (element.msRequestFullscreen) { /* IE/Edge */
+                element.msRequestFullscreen();
+            }
+        }
+    </script>
     <script src="game.js"></script>
 </body>
 </html>
